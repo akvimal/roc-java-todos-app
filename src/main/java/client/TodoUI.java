@@ -1,5 +1,6 @@
 package client;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,6 +22,7 @@ public class TodoUI {
 		logger.info("Application Started");
 		
 		Scanner input = new Scanner(System.in);
+		TodoManager manager = new TodoManager();
 		
 		showMainMenu();
 		
@@ -32,13 +34,27 @@ public class TodoUI {
 			switch (action) {
 				case 1: //List	
 					//TODO: implement
-					TodoManager manager = new TodoManager();
+					
 					List<Todo> todos = manager.findAll();
 					printTableFormat(todos);
 					showMainMenu();
 					break;
 				case 2: //New
 					//TODO: implement
+					System.out.println("Add item (y/n):");
+					String confirm = input.next();
+					if("y".equals(confirm.toLowerCase())) {
+						String desc = "";
+						do {
+							System.out.println("Description:");
+							desc = input.next();
+						} while(!validDesc(desc));
+						System.out.println("Due Date (YYYY-MM-DD):");
+						String date = input.next();
+						manager.save(new Todo(desc,new Date(date)));
+					} else {
+						
+					}
 					break;
 				case 3: //Update
 					//TODO: implement
@@ -56,6 +72,14 @@ public class TodoUI {
 		input.close();
 	}
 	
+	private static boolean validDesc(String desc) {
+		if(desc.matches("\\w.*")) {
+			return true;
+		}
+		System.out.println("Invalid Description");
+		return false;
+	}
+
 	private static void showMainMenu() {
 		System.out.println("1. List items");
 		System.out.println("2. Add item");
@@ -73,3 +97,5 @@ public class TodoUI {
 		}
 	}
 }
+
+	

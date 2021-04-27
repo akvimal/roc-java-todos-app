@@ -31,7 +31,7 @@ public class TodoDao {
 	public ArrayList<Todo> findAll(){
 		
 		ArrayList<Todo> todos = new ArrayList<Todo>();
-		
+		System.out.println("fetching data for findAll");
 		try {
 
 			String sql = "SELECT id, description, due_date, done FROM todos";

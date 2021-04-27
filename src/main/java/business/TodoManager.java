@@ -7,11 +7,16 @@ import model.Todo;
 
 //Business Layer
 public class TodoManager {
+	
+	private TodoDao dao = new TodoDao();
+
+	public void setDao(TodoDao dao) {
+		this.dao = dao;
+	}
 
 	public ArrayList<Todo> findAll(){
 		System.out.println("Received findAll request");
 		
-		TodoDao dao = new TodoDao();
 		ArrayList<Todo> list = dao.findAll();
 		
 		System.out.println("Received data from DB");
@@ -19,7 +24,6 @@ public class TodoManager {
 	}
 
 	public ArrayList<Todo> findByDesc(String desc){
-		TodoDao dao = new TodoDao();
 		return dao.findAll();
 	}
 	
