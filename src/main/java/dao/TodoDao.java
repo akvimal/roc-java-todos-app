@@ -18,7 +18,7 @@ public class TodoDao {
 	static {
 		try {
 			//System.out.println("Connecting..");
-			
+		
 			con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/learndb",
 					"postgres","postgres");
 			
@@ -29,7 +29,7 @@ public class TodoDao {
 	}
 	
 	public ArrayList<Todo> findAll(){
-
+		
 		ArrayList<Todo> todos = new ArrayList<Todo>();
 		
 		try {
@@ -48,8 +48,9 @@ public class TodoDao {
 
 				todos.add(new Todo(id,desc,due,status));
 			}
-			
+		
 		} catch (SQLException e) {
+			
 			e.printStackTrace();
 		} 
 		

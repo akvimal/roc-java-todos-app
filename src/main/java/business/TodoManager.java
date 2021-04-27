@@ -9,8 +9,13 @@ import model.Todo;
 public class TodoManager {
 
 	public ArrayList<Todo> findAll(){
+		System.out.println("Received findAll request");
+		
 		TodoDao dao = new TodoDao();
-		return dao.findAll();
+		ArrayList<Todo> list = dao.findAll();
+		
+		System.out.println("Received data from DB");
+		return list;
 	}
 
 	public ArrayList<Todo> findByDesc(String desc){

@@ -3,15 +3,22 @@ package client;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import business.TodoManager;
 import model.Todo;
 
 //Presentation Layer
 public class TodoUI {
 
+	private static final Logger logger = LogManager.getLogger(TodoUI.class);
+	
 	public static void main(String[] args) {
 		
 		System.out.println("Welcome to Todos");
+		
+		logger.info("Application Started");
 		
 		Scanner input = new Scanner(System.in);
 		
