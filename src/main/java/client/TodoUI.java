@@ -34,10 +34,14 @@ public class TodoUI {
 			switch (action) {
 				case 1: //List	
 					//TODO: implement
-					
-					List<Todo> todos = manager.findAll();
-					printTableFormat(todos);
-					showMainMenu();
+					try {
+						List<Todo> todos = manager.findAll();
+						printTableFormat(todos);
+						showMainMenu();
+					} catch (Exception e) {
+						System.out.println("ERROR: "+e.getLocalizedMessage());
+						System.exit(0);
+					}
 					break;
 				case 2: //New
 					//TODO: implement

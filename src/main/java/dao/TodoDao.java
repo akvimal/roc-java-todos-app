@@ -8,6 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import business.TodoManager;
 import model.Todo;
 import util.DBConnection;
 
@@ -15,14 +19,18 @@ import util.DBConnection;
 public class TodoDao {
 	
 	
-	public ArrayList<Todo> findAll(){
-		
-		Connection con = DBConnection.getInstance().getConnection();
-		
+	private static final Logger logger = LogManager.getLogger(TodoDao.class);
+	
+	
+	public ArrayList<Todo> findAll() throws SQLException {
 		ArrayList<Todo> todos = new ArrayList<Todo>();
-		System.out.println("fetching data for findAll");
+		
 		try {
-
+			Connection con = DBConnection.getInstance().getConnection();
+		
+		
+			System.out.println("fetching data for findAll");
+		
 			String sql = "SELECT id, description, due_date, done FROM todos";
 			
 			PreparedStatement pstmt = con.prepareStatement(sql);
@@ -39,8 +47,8 @@ public class TodoDao {
 			}
 		
 		} catch (SQLException e) {
-			
-			e.printStackTrace();
+			logger.error("Unable to perform DB operation", e);
+			throw e;
 		} 
 		
 		return todos;
