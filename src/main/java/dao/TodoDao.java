@@ -9,26 +9,15 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import model.Todo;
+import util.DBConnection;
 
 //Persistence Layer
 public class TodoDao {
 	
-	static Connection con = null;
-	
-	static {
-		try {
-			//System.out.println("Connecting..");
-		
-			con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/learndb",
-					"postgres","postgres");
-			
-			//System.out.println("Connected");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 	
 	public ArrayList<Todo> findAll(){
+		
+		Connection con = DBConnection.getInstance().getConnection();
 		
 		ArrayList<Todo> todos = new ArrayList<Todo>();
 		System.out.println("fetching data for findAll");
