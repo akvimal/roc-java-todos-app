@@ -30,6 +30,7 @@ public class TodoManager {
 	}
 
 	public boolean save(Todo todo) {
+		System.out.println("save called");
 		return false;
 	}
 	

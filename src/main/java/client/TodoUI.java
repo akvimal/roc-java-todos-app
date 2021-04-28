@@ -1,5 +1,7 @@
 package client;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -55,7 +57,17 @@ public class TodoUI {
 						} while(!validDesc(desc));
 						System.out.println("Due Date (YYYY-MM-DD):");
 						String date = input.next();
-						manager.save(new Todo(desc,new Date(date)));
+						
+						SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-DD");
+						try {
+							Date dt = formatter.parse(date);
+							
+							manager.save(new Todo(desc, dt));
+							
+						} catch (ParseException e) {
+							e.printStackTrace();
+						}
+					
 					} else {
 						
 					}
