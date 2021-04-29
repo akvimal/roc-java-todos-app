@@ -1,12 +1,9 @@
 package util;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import dao.TodoDao;
 
 public class DBConnection {
 	
@@ -15,7 +12,7 @@ public class DBConnection {
 	private static DBConnection instance;
 	private Connection conn = null;
 	
-	private DBConnection() throws SQLException {
+	private DBConnection() throws Exception {
 		
 			String url = ConfigReader.getInstance().getProperty("DB_URL");
 			String user = ConfigReader.getInstance().getProperty("DB_USER");
@@ -25,7 +22,7 @@ public class DBConnection {
 			
 	}
 	
-	public static DBConnection getInstance() throws SQLException {
+	public static DBConnection getInstance() throws Exception {
 		if(instance == null) {
 			instance = new DBConnection();
 		}

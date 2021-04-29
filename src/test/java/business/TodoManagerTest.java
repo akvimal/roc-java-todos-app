@@ -6,12 +6,17 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import dao.TodoDao;
 import model.Todo;
 
 public class TodoManagerTest {
+	
+	@Rule
+	public ExpectedException exceptionRule = ExpectedException.none();
 	
 	@Test
 	public void findAll() {
@@ -20,16 +25,19 @@ public class TodoManagerTest {
 		TodoDao daoMock = mock(TodoDao.class);
 		
 		ArrayList<Todo> mockReturnObjs = new ArrayList<Todo>();
-		when(daoMock.findAll()).thenReturn(mockReturnObjs);
-		
-		manager.setDao(daoMock);
-		
-		ArrayList<Todo> todos = manager.findAll();
-		
-		
-//		//assertion
-		
-		assertNotNull(todos);
+		try {
+			when(daoMock.findAll()).thenReturn(mockReturnObjs);
+			
+			manager.setDao(daoMock);
+			
+			ArrayList<Todo> todos = manager.findAll();
+			
+			assertNotNull(todos);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+	
 
 }
